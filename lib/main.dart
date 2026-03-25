@@ -1,6 +1,5 @@
 //Imports
 import 'package:flutter/material.dart';
-import 'class/splashscreen.dart';
 //main
 void main(){
   runApp(AdopcionesApp());
@@ -19,8 +18,7 @@ class AdopcionesApp extends StatelessWidget{
         colorScheme: ColorScheme.fromSeed(seedColor: Color(0x009acd32)),
         fontFamily: 'Roboto',
       ),
-      home: SplashScreen(),
+      //home: SplashScreen(),
     );
   }
-
 }
