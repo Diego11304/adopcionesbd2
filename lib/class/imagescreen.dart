@@ -10,13 +10,13 @@ class ImageScreen extends StatefulWidget{
   State<StatefulWidget> createState() {
     return _ImageScreenState();
   }
-  
 }
 
 class _ImageScreenState extends State<ImageScreen> {
   final ImagePicker _picker = ImagePicker();
   XFile? _imageFile;
   Uint8List? _imageBytes;
+
   final supabase = Supabase.instance.client;
 
   Future<void> pickImage(ImageSource source) async {
@@ -44,42 +44,68 @@ class _ImageScreenState extends State<ImageScreen> {
             upsert: false
         )
     );
-    final publicUrl =supabase.storage
+    final publicUrl = supabase.storage
         .from('imagenes_mascota')
-    .getPublicUrl('imamascota/$fileName');
+        .getPublicUrl('imamascota/$fileName');
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('imagen almacenada'))
+        SnackBar(content: Text('imagen almacenada'))
     );
 
-    Navigator.pushReplacement(
+    /*Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) {return FormScreen(urlImage: publicUrl);},
+        MaterialPageRoute(builder: (_) {
+          return FormScreen(urlImage: publicUrl
+          );
+        },
         )
-    );
+    );*/
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('registrar mascota'),),
-      body: SafeArea(
-          child: Column(
-            children: [
-              Flexible(
-                  child: Center(
-                    child: _imageBytes==null
-                    ? const Text('no hay imagen seleccionada')
-                        :ClipRRect(
-                      borderRadius: BorderRadiusGeometry.circular(12),
-                      child: Image.memory(_imageBytes!,fit: BoxFit.contain,),
-                    )
-                    ,
-                  )
-              )
-            ],
-          )
-      )
-    );
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+          appBar: AppBar(title: Text('registrar mascota'),),
+          body: SafeArea(
+              child: Column(
+                children: [
+                  Flexible(
+                      child: Center(
+                        child: _imageBytes == null
+                            ? const Text('no hay imagen seleccionada')
+                            : ClipRRect(
+                          borderRadius: BorderRadiusGeometry.circular(12),
+                          child: Image.memory(
+                            _imageBytes!, fit: BoxFit.contain,),
+                        ),
+                      )
+                  ),
+                  SizedBox(height: 10,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton.icon(
+                        onPressed: () => pickImage(ImageSource.gallery),
+                        icon: const Icon(Icons.photo),
+                        label: const Text('Galeria'),
+                      ),
+                      ElevatedButton.icon(
+                        onPressed: () => pickImage(ImageSource.camera),
+                        icon: const Icon(Icons.camera_alt),
+                        label: const Text('Camara'),
+                      ),
+                      ],
+                  ),
+                      SizedBox(height: 10,),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                            onPressed: uploadFile,
+                            child: const Text('Subir a supabase')
+                        ),
+                      )
+                    ],
+                  ),
+          ),
+      );
+    }
   }
-  }
-}
