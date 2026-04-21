@@ -61,7 +61,6 @@ class _ImageScreenState extends State<ImageScreen> {
         )
     );
   }
-
     @override
     Widget build(BuildContext context) {
       return Scaffold(

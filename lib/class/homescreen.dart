@@ -62,18 +62,31 @@ class HomeScreen extends StatelessWidget{
               Text('mascotas extraviadas', style: Theme.of(context).textTheme.titleLarge),
               SizedBox(height: 20,),
               Expanded(
-                  child: GridView.builder(
-                    itemCount: mascotas2.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 16,
-                      crossAxisSpacing: 16,
-                      childAspectRatio: 0.75,
-                    ),
-                    itemBuilder: (context, index){
-                      return MascotaCard(mascota: mascotas2[index]);
+                  child: FutureBuilder<List<Mascota>>(
+                    future: consultaMascotas('Extraviado'),
+                    builder: (context,snapshot){
+                      if (snapshot.connectionState==ConnectionState.waiting){
+                        return Center(child: CircularProgressIndicator(),);
+                      }
+                      if (snapshot.hasError){
+                        return Center(child: Text ('Error: ${snapshot.error}'),);
+                      }
+                      final mascotas =snapshot.data??[];
+                      if (mascotas.isEmpty){
+                        return Center(child: Text('No hay mascotas registradas'),);
+                      }
+                      return ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: mascotas.length,
+                        itemBuilder: (context, index){
+                          return Container(
+                            width: 160,
+                            margin: const EdgeInsets.only(right: 12),
+                            child: MascotaCard(mascota: mascotas[index],),
+                          );
+                        },
+                      );
                     },
-
                   )
               )
             ],

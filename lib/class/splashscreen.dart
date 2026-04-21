@@ -1,5 +1,6 @@
 //imports
 import 'package:flutter/material.dart';
+import 'formscreen.dart';
 import 'homescreen.dart';
 import 'imagescreen.dart';
 
@@ -26,7 +27,6 @@ class _SplashScreenState extends State<SplashScreen>{
   }
   );
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

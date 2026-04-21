@@ -1,3 +1,4 @@
+import 'package:adopcionesbd2/class/homescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -142,11 +143,10 @@ class _FormScreen extends State<FormScreen> {
                             content: Text("Mascota registrada 🐾"),
                           ),
                         );
-                       /* Navigator.pushReplacement(
+                       Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (_) => Screen()),
-                        );*/
-
+                          MaterialPageRoute(builder: (_) => HomeScreen()),
+                        );
                       } catch (e) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
