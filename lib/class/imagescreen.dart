@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'formscreen.dart';
+
 class ImageScreen extends StatefulWidget{
   const ImageScreen ({super.key});
   @override
@@ -50,15 +52,14 @@ class _ImageScreenState extends State<ImageScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('imagen almacenada'))
     );
-
-    /*Navigator.pushReplacement(
+    Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) {
-          return FormScreen(urlImage: publicUrl
+          return FormScreen(urlImagen: publicUrl
           );
         },
         )
-    );*/
+    );
   }
 
     @override

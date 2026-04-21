@@ -1,7 +1,6 @@
 //Imports
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
 import 'class/splashscreen.dart';
 //main
   Future<void> main() async{

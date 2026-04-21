@@ -1,5 +1,6 @@
 //imports
 import 'package:flutter/material.dart';
+import 'homescreen.dart';
 import 'imagescreen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -20,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen>{
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_){
-          return ImageScreen();
+          return HomeScreen();
         }));
   }
   );
