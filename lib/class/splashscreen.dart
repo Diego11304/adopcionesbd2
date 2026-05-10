@@ -1,4 +1,5 @@
 //imports
+import 'initscreen.dart';
 import 'package:flutter/material.dart';
 import 'formscreen.dart';
 import 'homescreen.dart';
@@ -22,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen>{
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_){
-          return HomeScreen();
+          return InitScreen();
         }));
   }
   );
